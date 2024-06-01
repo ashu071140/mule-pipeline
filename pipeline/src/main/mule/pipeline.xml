@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="447915f7-c54d-41ef-b323-bb8a833134e0" >
+		<http:listener-connection host="${http.hostname}" port="8081" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="5b632ecd-7953-4f17-aefc-ba18b7ee7661" file="properties/${env}.yaml" />
+	<flow name="pipelineFlow" doc:id="93094d99-ce23-4996-8a3f-57e82fcf26a5" >
+		<http:listener doc:name="Listener" doc:id="e8eb27de-36c6-402c-94f6-31bb797e125f" config-ref="HTTP_Listener_config" path="/pipeline"/>
+		<ee:transform doc:name="Transform Message" doc:id="a5fe8787-71a1-424c-8b9d-78a011ef0d18" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{"a": now()
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
