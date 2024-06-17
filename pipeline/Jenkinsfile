@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('compile') {
+			steps {
+                echo 'compiling..'
+				git url: 'https://github.com/lerndevops/DevOpsClassCodes'
+				bat label: '', script: 'mvn clean'
+            }
+        }
+    
+        stage('unit-test') {
+			steps {
+                echo 'codereview..'
+				bat label: '', script: 'mvn test'
+            }
+			
+        }
+
+        stage('package') {
+			steps {
+                echo 'metric-check..'
+				bat label: '', script: 'mvn package'	
+            }
+			
+        }
+    }
+}
