@@ -4,7 +4,7 @@ pipeline {
         stage('compile') {
 			steps {
                 echo 'compiling..'
-				git url: 'https://github.com/lerndevops/DevOpsClassCodes'
+				git url: 'https://github.com/ashu071140/mule-pipeline.git'
 				bat label: '', script: 'mvn clean'
             }
         }
