@@ -1,5 +1,9 @@
 pipeline {
     agent any
+	tools { 
+      maven 'MAVEN_HOME' 
+      jdk 'JAVA_HOME' 
+    }
     stages {
         stage('build') {
 			steps {
@@ -10,15 +14,15 @@ pipeline {
 
         stage('unit-test') {
 			steps {
-                echo 'codereview..'
-				sh "mvn test"
+                echo 'test mule..'
+				sh "mvn  test"
             }
 			
         }
         stage('package') {
 			steps {
-                echo 'metric-check..'
-				sh "mvn package"	
+                echo 'build jar..'
+				sh "mvn  package"	
             }
 			
         }
