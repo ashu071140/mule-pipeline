@@ -4,21 +4,21 @@ pipeline {
         stage('build') {
 			steps {
                 echo 'building..'
-				bat label: '', script: 'mvn clean install'
+				sh "mvn clean install"
             }
         }
 
         stage('unit-test') {
 			steps {
                 echo 'codereview..'
-				bat label: '', script: 'mvn test'
+				sh "mvn test"
             }
 			
         }
         stage('package') {
 			steps {
                 echo 'metric-check..'
-				bat label: '', script: 'mvn package'	
+				sh "mvn package"	
             }
 			
         }
