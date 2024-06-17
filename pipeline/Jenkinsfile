@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('compile') {
+        stage('Build') {
 			steps {
-                echo 'compiling..'
-				git url: 'https://github.com/ashu071140/mule-pipeline.git'
-				bat label: '', script: 'mvn clean'
+                echo 'building..'
+				
+				bat label: '', script: 'mvn clean install'
             }
         }
     
